@@ -28,3 +28,4 @@ l1 = ["s_01"]
 l2 = [False]
 
 session.insert_record("root.sg_test_01.d_01", TimetoTimeSpan("2023-05-09 22:00:00"), l1,  data_types, l2)
+session.execute_query_statement("select s_01 from root.sg_test_01.d_01")
