@@ -5,7 +5,7 @@ import time
 
 
 def TimetoTimeSpan(timeInfo):
-    timeArray = time.strptime(timeInfo, "%Y-%m-%d %H:%M:%s")
+    timeArray = time.strptime(timeInfo, "%Y-%m-%d %H:%M:%S")
     timeSpan = int(time.mktime(timeArray))
     return timeSpan
 
