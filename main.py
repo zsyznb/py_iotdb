@@ -24,5 +24,7 @@ session.create_time_series(
     "root.sg_test_01.d_01.s_01", TSDataType.BOOLEAN, TSEncoding.PLAIN, Compressor.SNAPPY
 )
 data_types = [TSDataType.BOOLEAN]
+l1 = ["s_01"]
+l2 = [False]
 
-session.insert_record("root.sg_test_01.d_01", TimetoTimeSpan("2023-05-09 22:00:00"), "s_01", data_types, False)
+session.insert_record("root.sg_test_01.d_01", TimetoTimeSpan("2023-05-09 22:00:00"), l1,  data_types, l2)
