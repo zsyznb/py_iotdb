@@ -46,6 +46,6 @@ for i in range(100):
 tablet = Tablet(
     "root.test.vehicle_01",measurement_list,datatype_list,value_list,timestamp_list
 )
-session.insert_tablet(tablet)
+session.insert_aligned_tablet(tablet)
 
 
