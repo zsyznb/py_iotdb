@@ -39,7 +39,7 @@ value_list = []
 timestamp_list = []
 for i in range(100):
     list_ = []
-    timestamp_list.append(int(time.time())-i)
+    timestamp_list.append(int(time.time() * 1000)-i)
     for _ in range(len(datatype_list)):
         list_.append(random.uniform(50.0, 100.0))
     value_list.append(list_)
