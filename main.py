@@ -45,12 +45,12 @@ timestamp_list = []
 for i in range(10000):
     list_ = []
     timestamp_list.append(timeStamp*1000+i*10000)
-    for i in range(len(datatype_list)):
-        if i == 1:
+    for j in range(len(datatype_list)):
+        if j == 1:
             list_.append(random.uniform(90.0, 100.0))
-        if i == 2:
+        if j == 2:
             list_.append(random.uniform(50.0, 60.0))
-        if i == 3:
+        if j == 3:
             list_.append(random.uniform(0.0, 10.0))
     value_list.append(list_)
 tablet = Tablet(
