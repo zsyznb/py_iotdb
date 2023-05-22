@@ -34,12 +34,17 @@ compressor_list = [
 ]
 session.create_aligned_time_series("root.test.vehicle_01", measurement_list, datatype_list, encoding_list, compressor_list)
 
+#create timestamp
+a = "2023-5-1 08:00:00"
+timeArray = time.strptime(a, "%Y-%m-%d %H:%M:%S")
+timeStamp = int(time.mktime(timeArray))
+
 # insert a tablet
 value_list = []
 timestamp_list = []
-for i in range(100):
+for i in range(10000):
     list_ = []
-    timestamp_list.append(int(time.time() * 1000)-i*1000*300)
+    timestamp_list.append(timeStamp*1000+i*10000)
     for _ in range(len(datatype_list)):
         list_.append(random.uniform(50.0, 100.0))
     value_list.append(list_)
