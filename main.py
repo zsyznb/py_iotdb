@@ -45,13 +45,10 @@ timestamp_list = []
 for i in range(10000):
     list_ = []
     timestamp_list.append(timeStamp*1000+i*10000)
-    for j in range(len(datatype_list)):
-        if j == 1:
-            list_.append(random.uniform(90.0, 100.0))
-        if j == 2:
-            list_.append(random.uniform(50.0, 60.0))
-        if j == 3:
-            list_.append(random.uniform(0.0, 10.0))
+    a = random.uniform(90.0, 100.0)
+    b = random.uniform(50.0, 60.0)
+    c = random.uniform(0.0, 10.0)
+    list_.append(a, b, c)
     value_list.append(list_)
 tablet = Tablet(
     "root.test.vehicle_01",measurement_list,datatype_list,value_list,timestamp_list
