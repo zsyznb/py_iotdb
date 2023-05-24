@@ -23,6 +23,7 @@ def temperature(session_1):
     DataTypeList = [
         TSDataType.FLOAT,
         TSDataType.FLOAT,
+        TSDataType.FLOAT
     ]
     EncodingList = [
         TSEncoding.PLAIN for _ in range(len(temperatureMeasurementList))
