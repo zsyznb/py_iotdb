@@ -54,3 +54,5 @@ def petrol_usage(session_1):
         "root.test.petrol_usage", petrolMeasureList, DataTypeList, value_list, timestamp_list
     )
     session.insert_aligned_tablet(tablet)
+
+petrol_usage(session)
