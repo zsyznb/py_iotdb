@@ -12,47 +12,50 @@ password_ = "root"
 session = Session(ip, port_, username_, password_, fetch_size=1024, zone_id="UTC+8")
 session.open(False)
 
-# create database
-session.set_storage_group("root.test")
 
-# set aligned timeseries
-measurement_list = [
-    "sensor_1",
-    "sensor_2",
-    "sensor_3",
-]
-datatype_list = [
-    TSDataType.FLOAT,
-    TSDataType.FLOAT,
-    TSDataType.FLOAT,
-]
-encoding_list = [
-    TSEncoding.PLAIN for _ in range(len(datatype_list))
-]
-compressor_list = [
-    Compressor.SNAPPY for _ in range(len(datatype_list))
-]
-session.create_aligned_time_series("root.test.vehicle_01", measurement_list, datatype_list, encoding_list, compressor_list)
+# CPU memory
+def cpu_memory(session_1):
+    session.set_storage_group("root.test")
+    CpuMemoryMeasurementList = [
+        "CPU",
+        "memory",
+    ]
+    DataTypeList = [
+        TSDataType.FLOAT,
+        TSDataType.FLOAT,
+    ]
+    EncodingList = [
+        TSEncoding.PLAIN for _ in range(len(CpuMemoryMeasurementList))
+    ]
+    CompressorList = [
+        Compressor.SNAPPY for _ in range(len(CpuMemoryMeasurementList))
+    ]
+    session_1.create_aligned_time_series("root.test.cpu_memory", CpuMemoryMeasurementList, DataTypeList, EncodingList,
+                                         CompressorList)
 
-#create timestamp
-a = "2023-5-1 08:00:00"
-timeArray = time.strptime(a, "%Y-%m-%d %H:%M:%S")
-timeStamp = int(time.mktime(timeArray))
+    # create timestamp
+    startTime = "2023-5-25 00:00:00"
+    timeArray = time.strptime(startTime, "%Y-%m-%d %H:%M:%S")
+    StartTimeStamp = int(time.mktime(timeArray))
+    stopTime = "2023-6-1 00:00:00"
+    timeArray = time.strptime(stopTime, "%Y-%m-%d %H:%M:%S")
+    StopTimeStamp = int(time.mktime(timeArray))
 
-# insert a tablet
-value_list = []
-timestamp_list = []
-for i in range(10000):
-    list_ = []
-    timestamp_list.append(timeStamp*1000+i*10000)
-    a = random.uniform(90.0, 100.0)
-    b = random.uniform(50.0, 60.0)
-    c = random.uniform(0.0, 10.0)
-    list_.append(a, b, c)
-    value_list.append(list_)
-tablet = Tablet(
-    "root.test.vehicle_01",measurement_list,datatype_list,value_list,timestamp_list
-)
-session.insert_aligned_tablet(tablet)
+    # insert static
+    value_list = []
+    timestamp_list = []
+    for i in range(StartTimeStamp, StopTimeStamp, 10):
+        list_ = []
+        timestamp_list.append(i * 1000)
+        a = random.uniform(50.0, 70.0)
+        b = random.uniform(500.0, 550.0)
+        list_.append(a)
+        list_.append(b)
+        value_list.append(list_)
+    tablet = Tablet(
+        "root.test.vehicle_01", CpuMemoryMeasurementList, DataTypeList, value_list, timestamp_list
+    )
+    session.insert_aligned_tablet(tablet)
 
 
+cpu_memory(session)
