@@ -49,7 +49,7 @@ def temperature(session_1):
         timestamp_list.append(i * 1000)
         a = random.uniform(85.0, 90.0)
         b = random.uniform(70.0, 75.0)
-        c = random.uniform(95.0-100.0)
+        c = random.uniform(95.0, 100.0)
         list_.append(a)
         list_.append(b)
         list_.append(c)
