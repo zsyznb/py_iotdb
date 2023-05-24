@@ -53,7 +53,7 @@ def cpu_memory(session_1):
         list_.append(b)
         value_list.append(list_)
     tablet = Tablet(
-        "root.test.vehicle_01", CpuMemoryMeasurementList, DataTypeList, value_list, timestamp_list
+        "root.test.cpu_memory", CpuMemoryMeasurementList, DataTypeList, value_list, timestamp_list
     )
     session.insert_aligned_tablet(tablet)
 
