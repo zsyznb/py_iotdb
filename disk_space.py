@@ -14,7 +14,6 @@ session.open(False)
 
 
 def disk_space(session_1):
-    session.set_storage_group("root.test")
     DiskSpaceMeasurementList = [
         "vehicle_01",
         "vehicle_02",
