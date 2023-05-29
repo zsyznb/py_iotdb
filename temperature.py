@@ -15,15 +15,14 @@ session.open(False)
 
 # CPU memory
 def temperature(session_1):
-    temperatureMeasurementList = [
-        "vehicle_01",
-        "vehicle_02",
-        "vehicle_03"
-    ]
+    name_list = []
+    for i in range(1, 100):
+        name_ = 'vehicle_' + str(i)
+        name_list.append(name_)
+
+    temperatureMeasurementList = name_list
     DataTypeList = [
-        TSDataType.FLOAT,
-        TSDataType.FLOAT,
-        TSDataType.FLOAT
+        TSDataType.FLOAT for _ in range(len(temperatureMeasurementList))
     ]
     EncodingList = [
         TSEncoding.PLAIN for _ in range(len(temperatureMeasurementList))
@@ -31,7 +30,8 @@ def temperature(session_1):
     CompressorList = [
         Compressor.SNAPPY for _ in range(len(temperatureMeasurementList))
     ]
-    session_1.create_aligned_time_series("root.test.temperature", temperatureMeasurementList, DataTypeList, EncodingList,
+    session_1.create_aligned_time_series("root.test.temperature", temperatureMeasurementList, DataTypeList,
+                                         EncodingList,
                                          CompressorList)
 
     # create timestamp
@@ -48,12 +48,16 @@ def temperature(session_1):
     for i in range(StartTimeStamp, StopTimeStamp, 10):
         list_ = []
         timestamp_list.append(i * 1000)
-        a = random.uniform(85.0, 90.0)
-        b = random.uniform(70.0, 75.0)
-        c = random.uniform(95.0, 100.0)
-        list_.append(a)
-        list_.append(b)
-        list_.append(c)
+        for t in range(len(temperatureMeasurementList)):
+            if t % 3 == 0:
+                a = random.uniform(85.0, 90.0)
+                list_.append(a)
+            if t % 3 == 1:
+                b = random.uniform(70.0, 75.0)
+                list_.append(b)
+            if t % 3 == 2:
+                c = random.uniform(95.0, 100.0)
+                list_.append(c)
         value_list.append(list_)
     tablet = Tablet(
         "root.test.temperature", temperatureMeasurementList, DataTypeList, value_list, timestamp_list
