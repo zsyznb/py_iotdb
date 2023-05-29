@@ -14,14 +14,11 @@ session.open(False)
 
 
 def petrol_usage(session_1):
-    petrolMeasureList = [
-        "vehicle_01",
-        "vehicle_02",
-        "vehicle_03",
-        "vehicle_04",
-        "vehicle_05",
-        "vehicle_06",
-    ]
+    name_list = []
+    for i in range(1, 100):
+        name_ = 'vehicle_' + str(i)
+        name_list.append(name_)
+    petrolMeasureList = name_list
     DataTypeList = [
         TSDataType.FLOAT for _ in range(len(petrolMeasureList))
     ]
@@ -54,5 +51,6 @@ def petrol_usage(session_1):
         "root.test.petrol_usage", petrolMeasureList, DataTypeList, value_list, timestamp_list
     )
     session.insert_aligned_tablet(tablet)
+
 
 petrol_usage(session)
