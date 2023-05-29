@@ -49,15 +49,19 @@ def temperature(session_1):
         list_ = []
         timestamp_list.append(i * 1000)
         for t in range(len(temperatureMeasurementList)):
-            if t % 3 == 0:
+            if t % 5 == 0:
                 a = random.uniform(85.0, 90.0)
                 list_.append(a)
-            if t % 3 == 1:
-                b = random.uniform(70.0, 75.0)
+            if t % 5 == 1:
+                b = random.uniform(70.0, 74.0)
                 list_.append(b)
-            if t % 3 == 2:
-                c = random.uniform(95.0, 100.0)
+            if t % 5 == 2:
+                c = random.uniform(96.0, 99.0)
                 list_.append(c)
+            if t % 5 == 3:
+                list_.append(random.uniform(101.0, 105.0))
+            if t % 5 == 4:
+                list_.append(random.uniform(80.0, 83.0))
         value_list.append(list_)
     tablet = Tablet(
         "root.test.temperature", temperatureMeasurementList, DataTypeList, value_list, timestamp_list
