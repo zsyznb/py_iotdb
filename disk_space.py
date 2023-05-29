@@ -14,14 +14,11 @@ session.open(False)
 
 
 def disk_space(session_1):
-    DiskSpaceMeasurementList = [
-        "vehicle_01",
-        "vehicle_02",
-        "vehicle_03",
-        "vehicle_04",
-        "vehicle_05",
-        "vehicle_06",
-    ]
+    name_list = []
+    for i in range(1, 100):
+        name_ = 'vehicle_' + str(i)
+        name_list.append(name_)
+    DiskSpaceMeasurementList = name_list
     DataTypeList = [
         TSDataType.FLOAT for _ in range(len(DiskSpaceMeasurementList))
     ]
@@ -48,18 +45,25 @@ def disk_space(session_1):
     for i in range(StartTimeStamp, StopTimeStamp, 10):
         list_ = []
         timestamp_list.append(i * 1000)
-        a_1 = random.uniform(50.0, 60.0)
-        a_2 = random.uniform(50.0, 55.0)
-        a_3 = random.uniform(80.0, 90.0)
-        a_4 = random.uniform(30.0, 40.0)
-        a_5 = random.uniform(20.0, 25.0)
-        a_6 = random.uniform(10.0, 15.0)
-        list_.append(a_1)
-        list_.append(a_2)
-        list_.append(a_3)
-        list_.append(a_4)
-        list_.append(a_5)
-        list_.append(a_6)
+        for t in range(len(DiskSpaceMeasurementList)):
+            if t % 6 ==0:
+                a_1 = random.uniform(50.0, 60.0)
+                list_.append(a_1)
+            if t % 6 ==1:
+                a_2 = random.uniform(50.0, 55.0)
+                list_.append(a_2)
+            if t % 6 ==2:
+                a_3 = random.uniform(80.0, 90.0)
+                list_.append(a_3)
+            if t % 6 ==3:
+                a_4 = random.uniform(30.0, 40.0)
+                list_.append(a_4)
+            if t % 6 ==4:
+                a_5 = random.uniform(20.0, 25.0)
+                list_.append(a_5)
+            if t % 6 ==5:
+                a_6 = random.uniform(10.0, 15.0)
+                list_.append(a_6)
         value_list.append(list_)
     tablet = Tablet(
         "root.test.disk_space", DiskSpaceMeasurementList, DataTypeList, value_list, timestamp_list
